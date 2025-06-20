@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+
+  <link rel="icon" href="../image/logo.jpg">
+  <title>Matoshree Resort & River Park</title>
+  <link rel="stylesheet" href="../CSS/home.css">
+  <link rel="stylesheet" href="../CSS/Book.css">
+</head>
+
+<body>
+
+  <header>
+
+    <nav id="navbar">
+
+      <div class="logo">
+        <img src="../image/logo.jpg" alt="logo" id="logo1">
+
+        <div class="name">
+          <h3>Matoshree</h3>
+          <h4>Resort & River Park</h4>
+        </div>
+
+      </div>
+
+      <div class="nav-bar">
+
+        <ul class="nav-ul">
+          <li class="nav-item"><a href="../HTML/first.html" class="a1">HOME</a></li>
+          <li class="nav-item"><a href="../HTML/About.html" class="a1">ABOUT US</a></li>
+          <li class="nav-item"><a href="../HTML/Services.html" class="a1">SERVICES</a></li>
+          <li class="nav-item"><a href="../HTML/Room.html" class="a1">ROOM</a></li>
+        </ul>
+
+      </div>
+
+      <div class="book">
+
+        <a href="../HTML/Event.html" class="btn book1 EVENT ankit2">BOOK YOUR EVENT</a>
+
+        <a href="../HTML/Book.html" class="btn book1 ankit2">BOOK YOUR STAY</a>
+
+      </div>
+
+
+    </nav>
+
+  </header>
+
+  <main>
+
+    <div class="blur"></div>
+
+    <div class="form">
+
+      <h1>BOOK YOUR STAY</h1>
+
+      <form name="myForm" action="../PHP/room_insert.php" method="post" id="bookingForm"
+        onsubmit="return validateForm()">
+
+
+        <div class="name1">
+          <label for="name">Full Name: </label>
+          <input type="text" name="name" id="name" placeholder="Enter a Name" style="margin-right: 2rem;">
+
+
+          <label for="email">Email Address:</label>
+          <input type="email" name="email" id="email" placeholder="Enter a Email">
+
+          <div class="err">
+            <span id="nameError" class="error" style="margin-left:6.3rem;"></span>
+            <span id="emailError" class="error" style="margin-left:12.5rem;"></span>
+          </div>
+
+        </div>
+
+        <div class="number1">
+          <label for="number">Number:</label>
+          <input type="text" name="number" id="number" placeholder="Enter a Number"
+            style="margin-left: 1rem;margin-right: 2.3rem;">
+
+
+          <label for="Room">Number of Room:</label>
+          <select name="Room" id="Room">
+            <option value="">Select Rooms</option>
+            <option value="1">1 Room</option>
+            <option value="2">2 Room</option>
+            <option value="3">3 Room</option>
+            <option value="4">4 Room</option>
+            <option value="5">5 Room</option>
+            <option value="6">6 Room</option>
+            <option value="7">7 Room</option>
+            <option value="8">8 Room</option>
+            <option value="9">9 Room</option>
+            <option value="10">10 Room</option>
+
+          </select>
+
+          <div class="err">
+            <span id="numberError" class="error" style="margin-left:4.5rem;"></span>
+            <span id="roomError" class="error" style="margin-left:5rem;"></span>
+          </div>
+
+        </div>
+
+        <div class="num">
+          <label for="Guests-Adult">Number of Adults: </label>
+          <select name="Guests-Adult" id="Guests-Adult" style="margin-right: 2.2rem;">
+            <option value="">Select Adults</option>
+            <option value="1">1 Adult</option>
+            <option value="2">2 Adult</option>
+            <option value="3">3 Adult</option>
+            <option value="4">4 Adult</option>
+            <option value="5">5 Adult</option>
+            <option value="6">6 Adult</option>
+            <option value="7">7 Adult</option>
+            <option value="8">8 Adult</option>
+            <option value="9">9 Adult</option>
+            <option value="10">10 Adult</option>
+            <option value="+10">+10 Adult</option>
+          </select>
+
+
+          <label for="Guests-chil">Number of Childrens: </label>
+          <select name="Guests-chil" id="Guests-chil">
+            <option value="0">No Children</option>
+            <option value="1">1 Children</option>
+            <option value="2">2 Children</option>
+            <option value="3">3 Children</option>
+            <option value="4">4 Children</option>
+            <option value="5">5 Children</option>
+            <option value="6">6 Children</option>
+          </select>
+
+          <div class="err">
+            <span id="adultError" class="error" style="margin-left:0.8rem;"></span>
+            <span id="childrenError" class="error" style="margin-left:5rem;"></span>
+          </div>
+
+        </div>
+
+        <div class="check">
+          <label for="Check-in">Check-in Date: </label>
+          <input type="date" name="Check-in" id="Check-in" style="margin-right: 3rem;">
+
+
+          <label for="Check-out">Check-out Date: </label>
+          <input type="date" name="Check-out" id="Check-out">
+
+          <div class="err">
+            <span id="checkinError" class="error" style="margin-left:5rem;"></span>
+            <span id="checkoutError" class="error" style="margin-left:6rem;"></span>
+          </div>
+
+        </div>
+
+        <div class="mess">
+
+          <label for="message">Special Requests: </label><br>
+          <textarea name="message" id="message" rows="5" cols="90" placeholder="Any Special Requests?"
+            style="padding: 0.5rem 0.5rem;font-size: 15px;"></textarea>
+        </div>
+
+        <button type="button" class="btn book1" id="rzp-button">Proceed to Payment</button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+
+  <script>
+    document.getElementById('rzp-button').onclick = function (e) {
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let number = document.getElementById('number').value;
+      let adult = parseInt(document.getElementById('Guests-Adult').value);
+      let children = parseInt(document.getElementById('Guests-chil').value);
+      let checkin = document.getElementById('Check-in').value;
+      let checkout = document.getElementById('Check-out').value;
+
+      if (!name || !email || !number || isNaN(adult) || isNaN(children)) {
+        alert("Please fill in required details before proceeding to payment.");
+        return;
+      }
+
+      const priceAdult = 600;
+      const priceChild = 400;
+      const subtotal = (adult * priceAdult) + (children * priceChild);
+      const cgst = subtotal * 0.09;
+      const sgst = subtotal * 0.09;
+      const total = subtotal + cgst + sgst;
+      const amt = total * 100; // in paise
+
+      let options = {
+        "key": "rzp_test_jakfrOzlFjmsi9",
+        "amount": amt,
+        "currency": "INR",
+        "name": "Matoshree Resort",
+        "description": "Room Booking Payment",
+        "handler": function (response) {
+          const jsPDF = window.jspdf.jsPDF;
+          const doc = new jsPDF("p", "mm", "a4");
+
+          const randomNum = Math.round(Math.random() * 1000000);
+          const gstnum = "27AJDPT9162A1Z5";
+          const invoiceNo = `RM-${Math.floor(1000 + Math.random() * 9000)}`;
+
+          // Header
+          doc.setFillColor(30, 144, 255);
+          doc.rect(0, 0, 210, 30, 'F');
+          doc.setFontSize(16);
+          doc.text("Matoshree Resort & River Park", 10, 18);
+          doc.setFontSize(10);
+          doc.text("Room Booking Invoice", 10, 26);
+
+          // Customer Info
+          doc.setFontSize(11);
+          doc.text(`BILL TO: ${randomNum}`, 10, 40);
+          doc.text(`Name: ${name}`, 10, 46);
+          doc.text(`Email: ${email}`, 10, 52);
+          doc.text(`Phone: ${number}`, 10, 58);
+
+          // Invoice Info
+          doc.text(`Invoice No: ${invoiceNo}`, 80, 40);
+          doc.text(`Date: ${new Date().toLocaleDateString()}`, 80, 46);
+          doc.text(`Payment ID: ${response.razorpay_payment_id}`, 80, 52);
+          doc.text(`GST NO : ${gstnum}`, 80, 58);
+
+          // Booking Info
+          doc.text("ROOM DETAILS:", 160, 40);
+          doc.text(`Check-in: ${checkin}`, 160, 46);
+          doc.text(`Check-out: ${checkout}`, 160, 52);
+          doc.text(`Adults: ${adult}`, 160, 58);
+          doc.text(`Children: ${children}`, 160, 64);
+
+          // Column Labels
+          const yStart = 80;
+          const cols = [12, 45, 60, 80, 100, 120, 140, 160, 180];
+          const headers = ["DESCRIPTION", "Adults", "Children", "Adult price", "Chil Price", "Price", "CGST", "SGST", "TOTAL"];
+          headers.forEach((txt, i) => doc.text(txt, cols[i], yStart - 3));
+
+          // Borders
+          doc.rect(10, yStart, 190, 10);
+          cols.slice(1).forEach(x => doc.line(x - 2, yStart, x - 2, yStart + 10));
+
+          // Row Values priceAdult priceChild
+          doc.text("Room Booking", cols[0], yStart + 7);
+          doc.text(` ${adult.toFixed()}`, cols[1], yStart + 7);
+          doc.text(` ${children.toFixed()}`, cols[2], yStart + 7);
+          doc.text(`Rs. ${priceAdult.toFixed()}`, cols[3], yStart + 7);
+          doc.text(`Rs. ${priceChild.toFixed()}`, cols[4], yStart + 7);
+          doc.text(`Rs. ${subtotal.toFixed()}`, cols[5], yStart + 7);
+          doc.text(`Rs. ${cgst.toFixed()}`, cols[6], yStart + 7);
+          doc.text(`Rs. ${sgst.toFixed()}`, cols[7], yStart + 7);
+          doc.text(`Rs. ${total.toFixed()}`, cols[8], yStart + 7);
+
+          // Totals
+          let y = 100;
+          doc.setFontSize(13);
+          doc.text(`Subtotal:      Rs. ${subtotal.toFixed()}`, 150, y); y += 6;
+          doc.text(`CGST (9%): Rs. ${cgst.toFixed()}`, 150, y); y += 6;
+          doc.text(`SGST (9%): Rs. ${sgst.toFixed()}`, 150, y); y += 6;
+          doc.setFont("bold");
+          doc.line(145, y, 200, y);
+          doc.text(`Total:             Rs. ${total.toFixed()}`, 150, y + 6);
+          doc.setFont("normal");
+
+          // Footer
+          doc.setFontSize(11);
+          doc.text("Matoshree Resort & River Park", 10, 100);
+          doc.text("Bhai Kotwal Marg, Opp. Ulhas River,", 10, 105);
+          doc.text("Near Yamuna Baug, Badlapur (W) - 421503", 10, 110);
+          doc.text("Dist: Thane, Taluka: Ambernath", 10, 115);
+          doc.text("Phone: 9890893444 | Email: info@matoshreeresort.com", 10, 120);
+
+          y = 150
+          doc.setFontSize(12);
+          doc.line(0, y - 10, 250, y - 10);
+          doc.text("1) If the booking is cancelled more than 2 days before the event, 20% of the total payment will be non-refundable.", 10, y);
+          doc.text("2) If the booking is cancelled one day before the event, 50% of the total payment will be non-refundable.", 10, y + 10);
+          doc.text("3) If the booking is cancelled on the same day as the event, 100% of the payment will be non-refundable.", 10, y + 20);
+          doc.text("4) Refunds (if applicable) will be processed within 7 working days to the original payment method.", 10, y + 30);
+          doc.text("5) Transaction charges (if any) will be deducted from the refundable amount.", 10, y + 40);
+          doc.text("6) Booking is confirmed only after full payment and confirmation via Invoice.", 10, y + 50);
+          doc.text("7) All bookings include CGST @ 9% and SGST @ 9% as per government rules.", 10, y + 60);
+          doc.text("8) Guests are responsible for any damages to resort property during the event or stay.", 10, y + 70);
+          doc.text("9) Event duration must adhere strictly to the allotted time slot. Additional time may incur extra charges.", 10, y + 80);
+          doc.text("10) Use of outside decorators, caterers, or music systems is allowed only with prior approval.", 10, y + 90);
+          doc.text("11) The resort is not liable for weather-related cancellations.", 10, y + 100);
+          doc.text("12) However, in case of such cancellations, 50% of the total payment will be refunded to the customer.", 10, y + 110);
+
+          const logo = new Image();
+          logo.src = "../image/logo.jpg";
+          logo.onload = function () {
+            doc.addImage(logo, "JPEG", 180, 5, 20, 20);
+            doc.save("Invoice_Matoshree_Room.pdf");
+
+            const form = document.forms['myForm'];
+
+            const idInput = document.createElement("input");
+            idInput.type = "hidden";
+            idInput.name = "razorpay_payment_id";
+            idInput.value = response.razorpay_payment_id;
+            form.appendChild(idInput);
+
+            const amtInput = document.createElement("input");
+            amtInput.type = "hidden";
+            amtInput.name = "amt";
+            amtInput.value = amt;
+            form.appendChild(amtInput);
+
+            const subtotalInput = document.createElement("input");
+            subtotalInput.type = "hidden";
+            subtotalInput.name = "subtotal";
+            subtotalInput.value = subtotal.toFixed(2); // Rounded to 2 decimal places
+            form.appendChild(subtotalInput);
+
+            const cgstInput = document.createElement("input");
+            cgstInput.type = "hidden";
+            cgstInput.name = "cgst";
+            cgstInput.value = cgst.toFixed(2);
+            form.appendChild(cgstInput);
+
+            const sgstInput = document.createElement("input");
+            sgstInput.type = "hidden";
+            sgstInput.name = "sgst";
+            sgstInput.value = sgst.toFixed(2);
+            form.appendChild(sgstInput);
+
+
+            form.submit();
+          };
+        },
+        "prefill": {
+          "name": name,
+          "email": email,
+          "contact": number
+        },
+        "theme": {
+          "color": "#3399cc"
+        }
+      };
+
+      let rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+    }
+  </script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="../JS/book.js"></script>
+
+
+  </script>
+
+</body>
+
+</html>

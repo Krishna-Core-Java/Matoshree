@@ -1,0 +1,52 @@
+main {
+    background-color: rgb(216, 215, 215);
+}
+
+.services {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: rgb(255, 255, 255);
+    margin: 2rem 1rem;
+    border-radius: 10px;
+    width: 21%;
+    height: 60vh;
+    box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+}
+
+.image {
+    height: 28vh;
+    overflow: hidden;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.image1 {
+    width: 100%;
+}
+
+.box-info {
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.box-info h2 {
+    line-height: 3rem;
+}
+
+.box-info ul {
+    padding-left: 1.2rem;
+}
+
+.box-info ul li {
+    line-height: 1.5rem;
+}

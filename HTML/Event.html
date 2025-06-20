@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+    <link rel="icon" href="../image/logo.jpg">
+    <title>Matoshree Resort & River Park</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link rel="stylesheet" href="../CSS/Event.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav id="navbar">
+
+            <div class="logo">
+                <img src="../image/logo.jpg" alt="logo" id="logo1">
+
+                <div class="name">
+                    <h3>Matoshree</h3>
+                    <h4>Resort & River Park</h4>
+                </div>
+
+            </div>
+
+            <div class="nav-bar">
+
+                <ul class="nav-ul">
+                    <li class="nav-item"><a href="../HTML/first.html" class="a1">HOME</a></li>
+                    <li class="nav-item"><a href="../HTML/About.html" class="a1">ABOUT US</a></li>
+                    <li class="nav-item"><a href="../HTML/Services.html" class="a1">SERVICES</a></li>
+                    <li class="nav-item"><a href="../HTML/Room.html" class="a1">ROOM</a></li>
+                </ul>
+
+            </div>
+
+            <div class="book">
+
+                <a href="../HTML/Event.html" class="btn1 book1 EVENT ankit2">BOOK YOUR EVENT</a>
+
+                <a href="../HTML/Book.html" class="btn book1 ankit2">BOOK YOUR STAY</a>
+            </div>
+
+
+        </nav>
+
+    </header>
+
+
+
+
+    <main>
+        <div class="form-contaner">
+
+            <div class="forminfo">
+
+                <h1>Book Your Event</h1>
+
+                <div class="form1">
+
+                    <form action="../PHP/event_insert.php" method="post" name="myForm">
+
+
+                        <div class="name1">
+                            <label for="name">Full Name: </label>
+                            <input type="text" name="name" id="name" placeholder="Enter a Name"
+                                style="margin-left: 3.5rem;"><br>
+                            <span id="nameError" class="error"></span><br>
+                        </div>
+
+                        <div class="email1">
+                            <label for="email">Email Address:</label>
+                            <input type="email" name="email" id="email" placeholder="Enter a Email"
+                                style="margin-left: 1.3rem;"><br>
+                            <span id="emailError" class="error"></span><br>
+                        </div>
+
+                        <div class="number1">
+                            <label for="number">Number :</label>
+                            <input type="number" name="number" id="number" placeholder="Enter a Number"
+                                style="margin-left: 4.5rem;"><br>
+                            <span id="numberError" class="error"></span><br>
+                        </div>
+
+                        <div class="event1">
+                            <label for="event">Event type: </label>
+                            <select name="event" id="event" style="margin-left: 3.5rem;">
+                                <option value="">Select an event type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="birthday">Birthday Party</option>
+                                <option value="corporate">Corporate Event</option>
+                                <option value="family-reunion">Family Reunion</option>
+                                <option value="anniversary">Anniversary Celebration</option>
+                                <option value="baby-shower">Baby Shower</option>
+                                <option value="engagement">Engagement Party</option>
+                                <option value="retreat">Wellness Retreat</option>
+                                <option value="conference">Conference/Seminar</option>
+                                <option value="holiday-party">Holiday Party</option>
+                                <option value="other">Other</option>
+                            </select><br>
+                            <span id="eventError" class="error"></span><br>
+                        </div>
+
+                        <div class="number1">
+                            <label for="guest">Number of Guest :</label>
+                            <input type="text" name="guest" id="guest" placeholder="Number of Guest"><br>
+                            <span id="guestError" class="error"></span><br>
+                        </div>
+
+                        <div class="date1">
+                            <label for="date">Date of a Event : </label>
+                            <input type="date" name="date" id="date" style="margin-left: 0.5rem;"><br>
+                            <span id="dateError" class="error"></span><br>
+                        </div>
+
+                        <div class="mess">
+                            <label for="message">Special Requests: </label><br>
+                            <textarea name="message" id="message" rows="3" cols="35"
+                                placeholder="Any Special Requests?"></textarea><br><br>
+                        </div>
+
+                        <button type="button" class="btn book1" id="rzp-button">Proceed to Payment</button>
+
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <div class="imag1">
+                <img src="../image/matoshreeHouse_10.jpg" alt="matoshreeHouse">
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        document.getElementById('rzp-button').onclick = function (e) {
+            // Basic form validation (optional)
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let number = document.getElementById('number').value;
+            let guest = document.getElementById('guest').value;
+            let eventName = document.getElementById('event').value;
+            let date = document.getElementById('date').value;
+
+            if (!name || !email || !number) {
+                alert("Please fill in required details before proceeding to payment.");
+                return;
+            }
+
+            let unitPrice = 400; // Per guest
+            let subtotal = guest * unitPrice;
+            let gstAmount = subtotal * 0.18; // 18% GST
+            let totalWithGST = subtotal + gstAmount;
+
+            let amt = totalWithGST * 100;
+
+
+            // Razorpay configuration
+            let options = {
+                "key": "rzp_test_jakfrOzlFjmsi9", // Replace with your Razorpay Key ID
+                "amount": amt, // Amount is in paise (200000 = ₹2000)
+                "currency": "INR",
+                "name": "Matoshree Resort",
+                "description": "Event Booking",
+                handler: function (response) {
+                    const jsPDF = window.jspdf.jsPDF;
+                    const doc = new jsPDF("p", "mm", "a4");
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const number = document.getElementById('number').value;
+                    const guest = parseInt(document.getElementById('guest').value);
+                    const eventName = document.getElementById('event').value;
+                    const date = document.getElementById('date').value;
+                    const gstnum = "27AJDPT9162A1Z5";
+                    const randomNum = Math.round(Math.random() * 1000000);
+
+                    const unitPrice = 400;
+                    const subtotal = guest * unitPrice;
+                    const cgst = subtotal * 0.09;
+                    const sgst = subtotal * 0.09;
+                    const total = subtotal + cgst + sgst;
+
+                    // 📘 Header
+                    doc.setFillColor(30, 144, 255);
+                    doc.rect(0, 0, 210, 30, 'F');
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFontSize(16);
+                    doc.text("Matoshree Resort & River Park", 10, 18);
+                    doc.setFontSize(10);
+                    doc.text("Event Booking Invoice", 10, 26);
+
+
+                    // 🧍 Customer Info
+                    doc.setFontSize(11);
+                    doc.text(`BILL TO: ${randomNum}`, 10, 40);
+                    doc.text(`Name: ${name}`, 10, 46);
+                    doc.text(`Email: ${email}`, 10, 52);
+                    doc.text(`Phone: ${number}`, 10, 58);
+
+                    // 🧾 Invoice Info
+                    doc.text(`Invoice No: EVT-${Math.floor(1000 + Math.random() * 9000)}`, 80, 40);
+                    doc.text(`Date: ${new Date().toLocaleDateString()}`, 80, 46);
+                    doc.text(`Payment ID: ${response.razorpay_payment_id}`, 80, 52);
+                    doc.text(`GST NO : ${gstnum}`, 80, 58);
+
+                    // 📅 Event Info
+                    doc.text("EVENT DETAILS:", 160, 40);
+                    doc.text(`Type: ${eventName}`, 160, 46);
+                    doc.text(`Date: ${date}`, 160, 52);
+                    doc.text(`Guests: ${guest}`, 160, 58);
+
+                    // Define column positions
+                    const colDesc = 12;
+                    const colGuest = 80;
+                    const colUnit = 100;
+                    const colPrice = 120;
+                    const colCGST = 140;
+                    const colSGST = 160;
+                    const colTotal = 180;
+
+
+                    doc.text("DESCRIPTION", colDesc, 77);
+                    doc.text("Guests", colGuest, 77);
+                    doc.text("UNIT", colUnit, 77);
+                    doc.text("Price", colPrice, 77);
+                    doc.text("CGST", colCGST, 77);
+                    doc.text("SGST", colSGST, 77);
+                    doc.text("TOTAL", colTotal, 77);
+
+                    // 📦 Table Row Borders
+                    doc.rect(10, 80, 190, 10);
+                    doc.line(colGuest - 2, 80, colGuest - 2, 90);
+                    doc.line(colUnit - 2, 80, colUnit - 2, 90);
+                    doc.line(colPrice - 2, 80, colPrice - 2, 90);
+                    doc.line(colCGST - 2, 80, colCGST - 2, 90);
+                    doc.line(colSGST - 2, 80, colSGST - 2, 90);
+                    doc.line(colTotal - 2, 80, colTotal - 2, 90);
+
+                    // 📦 Table Row Values
+                    doc.text(eventName, colDesc, 87);
+                    doc.text(`${guest}`, colGuest, 87);
+                    doc.text(`Rs. ${unitPrice.toFixed()}`, colUnit, 87);
+                    doc.text(`Rs. ${subtotal.toFixed()}`, colPrice, 87);
+                    doc.text(`Rs. ${cgst.toFixed()}`, colCGST, 87);
+                    doc.text(`Rs. ${sgst.toFixed()}`, colSGST, 87);
+                    doc.text(`Rs. ${total.toFixed()}`, colTotal, 87);
+
+                    // 💰 Totals
+                    let y = 100;
+                    doc.setFontSize(13);
+                    doc.text(`Subtotal:      Rs. ${subtotal.toFixed()}`, 150, y); y += 6;
+                    doc.text(`CGST (9%): Rs. ${cgst.toFixed()}`, 150, y); y += 6;
+                    doc.text(`SGST (9%): Rs. ${sgst.toFixed()}`, 150, y); y += 6;
+                    doc.setFont("bold");
+                    doc.line(145, 114, 200, 114);
+                    doc.text(`Total:             Rs. ${total.toFixed()}`, 150, y);
+                    doc.setFont("normal");
+
+
+                    // 📮 Footer with address
+                    y = 100;
+                    doc.setFontSize(11);
+                    doc.text("Matoshree Resort & River Park", 10, y);
+                    doc.text("Bhai Kotwal Marg, Opp. Ulhas River,", 10, y + 5);
+                    doc.text("Near Yamuna Baug, Badlapur (W) - 421503", 10, y + 10);
+                    doc.text("Dist: Thane, Taluka: Ambernath", 10, y + 15);
+                    doc.text("Phone: 9890893444 | Email: info@matoshreeresort.com", 10, y + 20);
+
+                    y = 150
+                    doc.setFontSize(12);
+                    doc.line(0, y - 10, 250, y - 10);
+                    doc.text("1) If the booking is cancelled more than 2 days before the event, 20% of the total payment will be non-refundable.", 10, y);
+                    doc.text("2) If the booking is cancelled one day before the event, 50% of the total payment will be non-refundable.", 10, y + 10);
+                    doc.text("3) If the booking is cancelled on the same day as the event, 100% of the payment will be non-refundable.", 10, y + 20);
+                    doc.text("4) Refunds (if applicable) will be processed within 7 working days to the original payment method.", 10, y + 30);
+                    doc.text("5) Transaction charges (if any) will be deducted from the refundable amount.", 10, y + 40);
+                    doc.text("6) Booking is confirmed only after full payment and confirmation via Invoice.", 10, y + 50);
+                    doc.text("7) All bookings include CGST @ 9% and SGST @ 9% as per government rules.", 10, y + 60);
+                    doc.text("8) Guests are responsible for any damages to resort property during the event or stay.", 10, y + 70);
+                    doc.text("9) Event duration must adhere strictly to the allotted time slot. Additional time may incur extra charges.", 10, y + 80);
+                    doc.text("10) Use of outside decorators, caterers, or music systems is allowed only with prior approval.", 10, y + 90);
+                    doc.text("11) The resort is not liable for weather-related cancellations.", 10, y + 100);
+                    doc.text("12) However, in case of such cancellations, 50% of the total payment will be refunded to the customer.", 10, y + 110);
+
+
+                    // Add Logo and Save
+                    const logo = new Image();
+                    logo.src = "../image/logo.jpg";
+                    logo.onload = function () {
+                        doc.addImage(logo, "JPEG", 180, 5, 20, 20);
+                        doc.save("Invoice_Matoshree_Event.pdf");
+
+                        // ➕ Add to form
+                        const form = document.forms['myForm'];
+
+                        const idInput = document.createElement("input");
+                        idInput.type = "hidden";
+                        idInput.name = "razorpay_payment_id";
+                        idInput.value = response.razorpay_payment_id;
+                        form.appendChild(idInput);
+
+                        const amtInput = document.createElement("input");
+                        amtInput.type = "hidden";
+                        amtInput.name = "amt";
+                        amtInput.value = total * 100;
+                        form.appendChild(amtInput);
+
+
+                        const subtotalInput = document.createElement("input");
+                        subtotalInput.type = "hidden";
+                        subtotalInput.name = "subtotal";
+                        subtotalInput.value = subtotal.toFixed(2); // Rounded to 2 decimal places
+                        form.appendChild(subtotalInput);
+
+                        const cgstInput = document.createElement("input");
+                        cgstInput.type = "hidden";
+                        cgstInput.name = "cgst";
+                        cgstInput.value = cgst.toFixed(2);
+                        form.appendChild(cgstInput);
+
+                        const sgstInput = document.createElement("input");
+                        sgstInput.type = "hidden";
+                        sgstInput.name = "sgst";
+                        sgstInput.value = sgst.toFixed(2);
+                        form.appendChild(sgstInput);
+
+                        form.submit();
+                    };
+                }
+                ,
+                "prefill": {
+                    "name": name,
+                    "email": email,
+                    "contact": number
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+
+            let rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="../JS/event.js"></script>
+
+</body>
+
+</html>
